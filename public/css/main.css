@@ -1,8 +1,17 @@
 :root {
     --blue: #1e90ff;
     --whiteish: #f6f6f6;
+    --highlight: #ffc824;
   }
 
 .bg-normal {
     background-color: var(--whiteish);
+}
+
+.color-highlight {
+    color: var(--highlight);
+}
+
+.border-color-highlight {
+    border-color: var(--highlight);
 }
