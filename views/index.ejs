@@ -1,6 +1,6 @@
 
 <div class="overflow-y-scroll w-full scroll-smooth">
-    <div class="container mx-auto h-screen">
+    <div class="container mx-auto h-screen" id="home">
         <div class="flex flex-row pt-24 md:pt-44">
             <div class="w-full my-auto">
                 <h1 class=" text-right my-auto text-6xl md:tracking-widerest font-extralight">REWEL</h1>
@@ -17,10 +17,10 @@
         </div>
             
         <div class="pt-20 md:container md:px-20 2xl:px-72 px-10 mx-auto">
-            <div class="flex w-full">
+            <div class="flex w-full mb-10">
                 <p class="text-5xl animate-bounce mx-auto" >&#128075;</p>
             </div>
-            <p class="text-3xl font-extralight leading-8 text-justify">
+            <p class="text-2xl font-extralight leading-8 text-justify">
                 Hi! I am a programmer, tech enthusiast, and student at Adamson University! Welcome to my website where I display all my projects both personal and academic.
                 Here you will also find my updates and blog posts for each project I make, as well as my resume and contact information.
             </p>
@@ -31,9 +31,13 @@
             </a>
         </div>
     </div>
+    <hr class="">
     <div class="container mx-auto">
         <%- include('partials/mini_projects.ejs')  %> 
     </div>
-    
+    <hr>
+    <div class="container mx-auto">
+        <%- include('partials/contacts.ejs')  %> 
+    </div>
 </div>
 
