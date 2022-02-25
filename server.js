@@ -1,7 +1,8 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const app = express();
-const http = require('http')
+const mongoose = require("mongoose")
+mongoose.connect("mongodb://localhost/rewelcabiles_me", { useNewUrlParser: true })
 
 // Template
 app.use(expressLayouts);
@@ -13,9 +14,9 @@ app.use('/css', express.static(__dirname+'public/css'));
 
 
 // Routes
-app.get('/', (req, res) => {  
-    res.render('index');
-
-});
+const indexRouter = require('./routes/index');
+const authRouter = require('./routes/auth');
+app.use('/', indexRouter);
+app.use('/', authRouter);
 
 app.listen(5000)
