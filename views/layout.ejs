@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/tailwind.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/background-pattern.css">
-    <title>Document</title>
+    <title>Rewel Cabiles</title>
 </head>
-<body class="bg-black">
-    <%- body %> 
+<body>
+    <div class="flex flex-row overflow-hidden h-screen">
+        <%- include('partials/sidebar.ejs') %> 
+        <%- body %> 
+    </div>
 </body>
 </html>
