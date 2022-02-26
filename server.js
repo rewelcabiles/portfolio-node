@@ -38,9 +38,13 @@ app.use('/css', express.static(__dirname+'public/css'));
 // Routes
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
-app.use('/', authRouter);
+const projectsRouter = require('./routes/projects');
+
+
+
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
+app.use('/projects', projectsRouter);
 
 
 app.listen(5000)
