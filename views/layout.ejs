@@ -4,14 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/tailwind.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/background-pattern.css">
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/background-pattern.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <title>Rewel Cabiles</title>
 </head>
-<body>
+<body class="overflow-hidden">
+    <!--Navigation bar-->
+    <div class="flex flex-col">
+    <nav class="bg-gray-900 absolute top-0 w-screen z-50">
+        <div class="container mx-auto flex flex-row items-center justify-between px-4 py-2">
+            <div class="flex flex-row items-center mx-auto pl-32 gap-20">
+                <a href="/" class="px-4 py-2 text-white font-bold hover:bg-gray-800">Home</a>
+                <a href="/projects" class="px-4 py-2 text-white font-bold hover:bg-gray-800">Projects</a>
+                <a target="_blank" href="https://f004.backblazeb2.com/file/rewelcabiles-xyz-media/common/resume.pdf" class="px-4 py-2 text-white font-bold hover:bg-gray-800">Resume</a>
+                <% if (user) { %>
+                    <a class="px-4 py-2 text-white font-bold hover:bg-gray-800" href="#">
+                        Manage
+                    </a>
+                    <a class="px-4 py-2 text-white font-bold hover:bg-gray-800" href="/logout">
+                        Logout
+                    </a>
+                <% } %>
+            </div>
+        </div>
+    </nav>
+    <!--End of Navigation bar-->
     <%- body %> 
-    
+</div>
 </body>
 </html>
