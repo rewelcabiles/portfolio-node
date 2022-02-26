@@ -2,11 +2,10 @@ const express = require('express')
 const bcrypt = require('bcrypt')
 const User = require('../models/User.js')
 
-var bodyParser = require('body-parser')
-
 const router = express.Router()
 
 // create application/json parser
+var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
  
 // create application/x-www-form-urlencoded parser
@@ -51,14 +50,18 @@ router.post('/login', urlencodedParser, (req, res) => {
 });
 
 router.get('/login', (req, res) => { 
-    res.render('login', {
+    res.render('auth/login', {
         "isRegister": false
     });
 });
 
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/login')
+})
 
 router.get('/register', (req, res) => {
-   res.render('login', {
+   res.render('auth/login', {
        "isRegister": true
    });
 });

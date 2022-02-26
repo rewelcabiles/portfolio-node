@@ -2,10 +2,14 @@ const express = require('express')
 const router = express.Router()
 
 
+// Routes
 router.get('/', (req, res) => {  
-    console.log(req.session.user)
     res.render('index');
 });
+
+
+
+
 
 
 module.exports = router

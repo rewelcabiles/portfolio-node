@@ -19,7 +19,10 @@ app.use(session({
     store: MongoStore.create(mongoose.connection)
 }))
 
-
+app.use(function (req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+})
 
 
 
@@ -37,6 +40,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 app.use('/', authRouter);
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 
 
 app.listen(5000)
