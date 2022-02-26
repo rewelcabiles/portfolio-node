@@ -1,10 +1,10 @@
 const express = require('express')
-const router = express.Router()
 const bcrypt = require('bcrypt')
-
-
 const User = require('../models/User.js')
+
 var bodyParser = require('body-parser')
+
+const router = express.Router()
 
 // create application/json parser
 var jsonParser = bodyParser.json()
@@ -40,7 +40,7 @@ router.post('/login', urlencodedParser, (req, res) => {
         }
         if (user) {
             if (bcrypt.compareSync(password, user.password)) {
-                console.log('password match')
+                req.session.user = user;
                 res.redirect('/')
             } else {
                 console.log('password does not match')
