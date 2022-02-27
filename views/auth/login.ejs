@@ -1,18 +1,27 @@
-<div class="container mx-auto">
-    <div class="flex justify-center items-center mx-auto mt-20">
-        
-
+<div class="container mx-auto ">
+    <div class="flex justify-center items-center mx-auto mt-20 p-10 ">
         <form  method="post">
-            <div class="flex flex-col gap-11">
-                <% if (isRegister) { %>
-                    <h1 class="text-5xl text-center font-extralight tracking-widest"> REGISTER</h1>
-                <% } else {%>
-                    <h1 class="text-5xl text-center font-extralight tracking-widest"> LOGIN</h1>
+            <div class="flex flex-col gap-11 shadow-lg p-10 rounded-lg">
+                <% if (locals.error) { %>
+                    <div class="">
+                        <div class="bg-red-500 text-white font-bold rounded-lg p-2">
+                            <%= error %>
+                        </div>
+                    </div>
                 <% } %>
-                <label for="username" class="text-lg">Username</label>
-                <input type="text" name="username" id="username" class="w-full p-2 border-2 border-gray-500">
-                <label for="password" class="text-lg">Password</label>
+                <% if (isRegister) { %>
+                    <h1 class="text-3xl "> REGISTER</h1>
+                <% } else {%>
+                    <h1 class="text-3xl"> LOGIN</h1>
+                <% } %>
+                <div>
+                    <label for="username" class="text-lg">Username</label>
+                    <input type="text" name="username" id="username" class="w-full p-2 border-2 border-gray-500">
+                </div>
+                <div>
+                    <label for="password" class="text-lg">Password</label>
                 <input type="password" name="password" id="password" class="w-full p-2 border-2 border-gray-500">
+                </div>
                 <% if(isRegister == false){ %>
                     <button type="submit" class="w-full p-2 border-2 border-gray-500"> Login</button>
                   <% } else{ %>  
