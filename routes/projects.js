@@ -19,7 +19,8 @@ const multerStorage = multer.diskStorage({
         fs.access(dest, function (error) {
             if (error) {
                 console.log("Directory does not exist.");
-                return fs.mkdir(dest, (error) => cb(error, dest));
+                fs.mkdirSync(dest, {recursive:true})
+                return cb(null, dest);
             } else {
                 console.log("Directory exists.");
                 return cb(null, dest);
