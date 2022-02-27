@@ -69,6 +69,29 @@ router.get('/', (req, res) => {
     });
 });
 
+
+router.get('/alternative', (req, res) => {
+    // get all distinct tags from Projects and get all projects
+    Project.distinct("tags", (err, tags) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log(tags)
+            Project.find({}, (err, projects) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.render('projects/projects_alternative', {
+                        all_projects: projects,
+                        tags: tags
+                    })
+                }
+            })
+        }
+    });
+});
+
+
 router.get('/add', (req, res) => {
     //check if user is logged in
     if (req.session.user) {

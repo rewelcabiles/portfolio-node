@@ -29,7 +29,7 @@ function tagClicked(tag) {
     to_display = []
 
     var tag_show =  document.getElementById("tag_show")
-    tag_show.innerHTML = '<span class="text-yellow-400 mr-1"> &#8505;  </span>    Showing ' + tag;
+    tag_show.innerHTML = 'Showing ' + tag;
     if (tag == "All") {
         //iterate through all_projects
         for (var i = 0; i < all_projects.length; i++) {
@@ -58,6 +58,14 @@ function tagClicked(tag) {
 
 }
 
+var current_card = document.getElementById("base-card")
+
+function showProject(project_name) {
+    projectCard = document.getElementById('card-'+project_name)
+    current_card.style.display = "none";
+    projectCard.style.display = "grid"
+    current_card = projectCard
+}
 
 // .replace(/\s/g, "_")
 
