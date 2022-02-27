@@ -59,7 +59,7 @@ router.get('/', (req, res) => {
                     console.log(err)
                 } else {
                     res.render('projects/projects', {
-                        projects: projects,
+                        all_projects: projects,
                         tags: tags
                     })
                 }
