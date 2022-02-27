@@ -8,23 +8,24 @@
                 </div>
             <% } %>
 
-
-            <h1 class="text-2xl font-bold mb-2">
-                Add A Project
-            </h1>
+            <% if (locals.project) { %>
+                <h1 class="text-2xl font-bold mb-2">Edit Project</h1>
+            <% } else { %>
+                <h1 class="text-2xl font-bold mb-2">Add Project</h1>
+            <% } %>
             <form action="#" enctype="multipart/form-data" method="POST">
                 <div class="flex flex-col">
                     <div class="mb-10">
                         <label for="project_name" class="text-md block">Project Name</label>
-                        <input type="text" name="project_name" id="project_name" class="rounded-lg p-1  w-full border-2 border-gray-800">
+                        <input type="text" name="project_name" id="project_name" class="w-full p-2 border-2 border-gray-500" value="<%= locals.project.name %>">
                     </div>
                     <div class="mb-10">
                         <label for="project_description" class="text-md block">Project Description</label>
-                        <textarea name="project_description" id="project_description" class="border-2 w-full rounded-lg p-1 border-gray-800"></textarea>
+                        <textarea name="project_description" id="project_description" class="w-full p-2 border-2 border-gray-500" rows="5"><%= locals.project.description %></textarea>
                     </div>
                     <div class="mb-10">
                         <label for="project_link" class="text-md block">Project Link</label>
-                        <input type="text" name="project_link" id="project_link" class="rounded-lg p-1 w-full border-2 border-gray-800">
+                        <input type="text" name="project_link" id="project_link" class="w-full p-2 border-2 border-gray-500" value="<%= locals.project.projectLink %>">
                     </div>
 
                     <div class="mb-10">
@@ -33,10 +34,14 @@
                     </div>
                     <div class="mb-10">
                         <label for="project_tags" class="text-md block">Tags</label>
-                        <input type="text" name="project_tags" id="project_tags" class="rounded-lg p-1 w-full border-2 border-gray-800">
+                        <input type="text" name="project_tags" id="project_tags" class="w-full p-2 border-2 border-gray-500" value="<%= locals.project.tags.join(', ') %>">
                     </div>
                     <button class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                        Add
+                        <% if (locals.project) { %>
+                            Update
+                        <% } else { %>
+                            Add
+                        <% } %>
                     </button> 
             </form>
         </div>

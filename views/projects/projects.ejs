@@ -56,16 +56,20 @@
                             <div id='card-<%= project.safe_name %>' class="hidden col-span-2">
                                     <div class="bg-white shadow-xl grid grid-cols-1 rounded-xl drop-shadow-2xl  border-2 border-slate-900  hover:border-white transition ease-in-out lg:grid-cols-12 p-6">
                                         <div class="flex flex-col lg:col-span-8 lg:p-8 bg-white rounded-xl">
+                                            
+                                                <% if (locals.user) { %>
+                                                    <div class="flex flex-row  ">
+                                                        <a href="update/<%= project.safe_name %>" class="text-green-500 p-1">Edit</a>
+                                                        <a href="delete/<%= project.safe_name %>" class="text-red-500 p-1">Delete</a>
+                                                    </div>
+                                                <% } %>
+                                                
                                             <div class="flex flex-row">
+                                                
                                                 <div class="flex flex-row">
                                                     <a href="view/<%= project.safe_name %>"  class="text-2xl font-serif">
                                                         <%= project.name %>
                                                     </a>
-                                                    <!--Check if user is logged in-->
-                                                    <% if (locals.user) { %>
-                                                        <a href="#" class="text-green-500 p-1">Edit</a>
-                                                        <a href="delete/<%= project.safe_name %> " class="text-red-500 p-1">Delete</a>
-                                                    <% } %>
                                                 </div>
                                                 <a target="_blank" href="<%= project.projectLink %>" class="ml-auto text-md"> <i class=" bi bi-github"></i> Github </a>
                                             </div>
@@ -82,7 +86,12 @@
                                             </p>
                                         </div>
                                         <div class="ml-auto lg:col-span-4 w-full h-56 mx-auto p-2 pt-8">
-                                            <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
+                                            <% if (project.banner == "") { %>
+                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/media/placeholder_small.jpg" alt="">
+                                            <% } else { %>
+                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
+                                            <% } %>
+                                            
                                         </div>
                                     </div>
                                 

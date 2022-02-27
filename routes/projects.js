@@ -101,6 +101,70 @@ router.get('/add', (req, res) => {
     }
 }); 
 
+// Edit a project
+router.get('/update/:safe_name', (req, res) => {
+    //check if user is logged in
+    if (req.session.user) {
+        // find by name
+        Project.findOne({safe_name: req.params.safe_name}, (err, project) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.render('projects/add_project', {
+                    project: project
+                })
+            }
+        });
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+function renameFolder(old_name, new_name) {
+    fs.rename("public/projects/" + old_name, "public/projects/" + new_name, (err) => {
+        if (err) {
+            console.log(err)
+        } else {
+            console.log("Renamed folder")
+        }
+    })
+}
+// Update a project
+router.post('/update/:safe_name', upload.single('project_image'), (req, res) => {
+    //check if user is logged in
+    safe_name = req.params.safe_name;
+    if (req.session.user) {
+        var new_safe_name = req.body.project_name.replace(/\s/g, "_");
+
+        //get project by safe_name
+        Project.findOne({safe_name: safe_name}, (err, project) => {
+            if (err) {
+                console.log(err)
+            } else {
+                // rename folder
+                if (new_safe_name != project.safe_name) {
+                    renameFolder(project.safe_name, new_safe_name)
+                }
+                if (req.file) {
+                    project.banner = new_safe_name + "/banner." + req.file.mimetype.split("/")[1];
+                } else {
+                    project.banner = new_safe_name + "/banner." + project.banner.split(".").pop();
+                }
+                // update project
+                project.name = req.body.project_name;
+                project.description = req.body.project_description;
+                project.tags = req.body.project_tags.split(", ");
+                project.safe_name = new_safe_name;
+                project.save()
+                res.redirect('/projects')
+            }
+        });
+    } else {
+        res.sendStatus(404);
+    }
+});
+
+
 router.post('/add', upload.single("project_image"), urlencodedParser, (req, res) => {
     if (!req.session.user) {
         res.sendStatus(404);
@@ -116,18 +180,23 @@ router.post('/add', upload.single("project_image"), urlencodedParser, (req, res)
                 res.render('add_project', { error: "Project already exists" });
             } else {
                 const project_name = req.body.project_name.replace(/\s/g, "_");
+                if (req.file) {
+                    // if a banner was uploaded, add the project to the database
+                    banner = project_name + "/banner." + req.file.mimetype.split("/")[1]
+                    
+                } else {
+                    banner = ""
+                }
                 var newProject = new Project({
                     name: req.body.project_name,
                     safe_name: req.body.project_name.replace(/\s/g, "_"),
                     description: req.body.project_description,
-                    banner: project_name + "/banner." + req.file.mimetype.split("/")[1],
+                    banner: banner,
                     projectLink: req.body.project_link,
                     tags: req.body.project_tags.split(", "),
                     creationDate: Date.now()
                 });
-                //save project to database
                 newProject.save();
-                
                 res.redirect('/projects');
             }
         }
