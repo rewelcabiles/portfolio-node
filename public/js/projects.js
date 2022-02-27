@@ -35,25 +35,27 @@ function tagClicked(tag) {
         for (var i = 0; i < all_projects.length; i++) {
             to_display.push(all_projects[i].name)
         }
+        console.log(to_display)
     } else {
         for (var i = 0; i < all_projects.length; i++) {
             if (all_projects[i].tags.includes(tag)) {
                 to_display.push(all_projects[i].name)
             }
         }
-        var projects_container = document.getElementById("projects_container")
-        // iterate through projects_container children
-        for (var i = 0; i < projects_container.children.length; i++) {
-            //if child id is in to_display
-            if (to_display.includes(projects_container.children[i].id)) {
-                // show child
-                projects_container.children[i].style.display = "grid"
-            } else {
-                // hide child
-                projects_container.children[i].style.display = "none"
-            }
+    }
+    var projects_container = document.getElementById("projects_container")
+    // iterate through projects_container children
+    for (var i = 0; i < projects_container.children.length; i++) {
+        //if child id is in to_display
+        if (to_display.includes(projects_container.children[i].id)) {
+            // show child
+            projects_container.children[i].style.display = "grid"
+        } else {
+            // hide child
+            projects_container.children[i].style.display = "none"
         }
     }
+
 }
 
 

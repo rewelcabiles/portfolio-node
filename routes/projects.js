@@ -69,10 +69,19 @@ router.get('/', (req, res) => {
 });
 
 router.get('/add', (req, res) => {
-    res.render('projects/add_project');
+    //check if user is logged in
+    if (req.session.user) {
+        res.render('projects/add_project');
+    } else {
+        res.sendStatus(404);
+    }
 }); 
 
 router.post('/add', upload.single("project_image"), urlencodedParser, (req, res) => {
+    if (!req.session.user) {
+        res.sendStatus(404);
+    } 
+
     // check if exists in database
     Project.findOne({ name: req.body.project_name }, (err, project) => {
         if (err) {
@@ -85,8 +94,10 @@ router.post('/add', upload.single("project_image"), urlencodedParser, (req, res)
                 const project_name = req.body.project_name.replace(/\s/g, "_");
                 var newProject = new Project({
                     name: req.body.project_name,
+                    safe_name: req.body.project_name.replace(/\s/g, "_"),
                     description: req.body.project_description,
                     banner: project_name + "/banner." + req.file.mimetype.split("/")[1],
+                    projectLink: req.body.project_link,
                     tags: req.body.project_tags.split(", "),
                     creationDate: Date.now()
                 });
@@ -99,6 +110,39 @@ router.post('/add', upload.single("project_image"), urlencodedParser, (req, res)
     });
 });
 
+// route to delete a project
+router.get('/delete/:safe_name', (req, res) => {
+    if (!req.session.user) {
+        res.sendStatus(404);
+    }
+    // delete a project from database
+    Project.deleteOne({ safe_name: req.params.safe_name }, (err, project) => {
+        if (err) {
+            console.log(err);
+        }
+        res.redirect('/projects');
+    });
+});
+
+// route to view a project
+router.get('/view/:project_name', (req, res) => {
+    // get project from database
+    Project.findOne({ safe_name: req.params.project_name }, (err, project) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (project) {
+                res.render('projects/view_project', {
+                    project: project
+                });
+            } else {
+                res.sendStatus(404);
+            }
+        }
+    });
+});
+
+    
 
 
 

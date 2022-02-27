@@ -36,17 +36,31 @@
                     <span class="text-yellow-400 mr-1"> &#8505;  </span>    Showing All
                 </button>
             </div>
-            <div class="mb-20 lg:mx-52" id="projects_container">
+            <!-- Check if user -->
+            <% if (locals.user) { %>
+                <div class="mb-10 lg:mx-52 flex">
+                    <a href="add" class="text-center w-full rounded-md bg-green-600 py-2 font-bold hover:bg-green-500 transition ease-linear text-white">Add New Project</a>
+                </div>
+            <% } %>
+            <div class="mb-20 lg:mx-48 rounded-2xl shadow-2xl bg-slate-100" id="projects_container">
                 <% all_projects.forEach(project => { %>
-                        <div id=<%= project.name.replace(/\s/g, "_") %> >
-                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-9">
+                        <div id=<%= project.safe_name %> >
+                            <div class="bg-white grid grid-cols-1 rounded-lg border-2 border-white p-4 hover:border-slate-900 transition ease-in-out lg:grid-cols-12 gap-9">
                                 <div class="flex flex-col lg:col-span-8">
-                                    <div>
-                                        <p class="text-2xl font-bold">
-                                            <%= project.name %>
-                                        </p>
+                                    <div class="flex flex-row">
+                                        <div class="flex flex-row">
+                                            <a href="view/<%= project.safe_name %>" class="text-2xl font-bold">
+                                                <%= project.name %>
+                                            </a>
+                                            <!--Check if user is logged in-->
+                                            <% if (locals.user) { %>
+                                                <a href="#" class="text-green-500 p-1">Edit</a>
+                                                <a href="delete/<%= project.safe_name %> " class="text-red-500 p-1">Delete</a>
+                                            <% } %>
+                                        </div>
+                                        <a target="_blank" href="<%= project.projectLink %>" class="ml-auto text-lg"> <i class=" bi bi-github"></i> Github Link </a>
                                     </div>
-                                    <p class="text-md pt-6">
+                                    <p class="text-md pt-6 text-justify">
                                         <%= project.description %>
                                     </p>
                                 </div>
