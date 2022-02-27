@@ -15,20 +15,20 @@
                 </div>
                 <div class="grid grid-rows-2 xl:grid-cols-3 gap-5 md:gap-10">
                     <div class="p-6">
-                        <p class="text-lg ">Tags</p>
-                        <hr class="mb-4 border-slate-800">
+                        <p class="text-lg mb-4 ">Tags</p>
+                        
                         <div class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 col-span-2 drop-shadow-md">
-                            <button class="rounded-md border-2 border-slate-900 p-1 hover:text-white hover:bg-slate-800 bg-slate-50 text-black transition ease-in" onclick="tagClicked('All')">
+                            <button class="rounded-sm border-2 border-slate-900 p-1 hover:text-white hover:bg-slate-800 bg-slate-50 text-black transition ease-in" onclick="tagClicked('All')">
                                 All
                             </button>
                             <% tags.forEach(tag => { %>
-                                <button class="rounded-md border-2 border-slate-900 text-sm font-mono hover:text-black hover:bg-slate-50  bg-slate-800 text-white transition ease-in" onclick="tagClicked('<%= tag %>')">
+                                <button class="rounded-sm border-2 border-slate-900 text-sm hover:text-black hover:bg-slate-50  bg-slate-800 text-white transition ease-in" onclick="tagClicked('<%= tag %>')">
                                     <%= tag %>
                                 </button>
                             <% }) %>
                         </div>
-                        <hr class="my-4 border-slate-800">
-                        <div class="container flex text-md font-mono mb-10">
+                        
+                        <div class="container flex text-sm font-mono my-5">
                             <p class="" id="tag_show">Showing All</p>
                             <a class="ml-auto text-md" href="alternative"> Alternative Page</a>
                         </div>
@@ -52,22 +52,9 @@
                             <% }) %>
                         </div>
                     </div>
-                    <div class="col-span-2">
-                        <div id="base-card" class="col-span-2">
-                            <div class=" clouds-dark  shadow-xl rounded-xl drop-shadow-2xl border-2 border-slate-900  hover:border-white transition ease-in-out grid grid-cols-8">
-                                <div class="p-14 h-80 rounded-xl bg-white col-span-7">
-                                    <p class="text-2xl font-serif ">
-                                        Heya!
-                                    </p>
-                                    <p class="text-lg pt-6 text-justify">
-                                        Thanks for taking the time to check out my projects! Click any of the images to the left to find out more about them!
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-span-2" id="projects_panel">
                         <% all_projects.forEach(project => { %>
                             <div id='card-<%= project.safe_name %>' class="hidden col-span-2">
-                                
                                     <div class="bg-white shadow-xl grid grid-cols-1 rounded-xl drop-shadow-2xl  border-2 border-slate-900  hover:border-white transition ease-in-out lg:grid-cols-12 p-6">
                                         <div class="flex flex-col lg:col-span-8 lg:p-8 bg-white rounded-xl">
                                             <div class="flex flex-row">

@@ -3,6 +3,7 @@ var to_display = [];
 
 var all_tags = [];
 var current_tag;
+var current_card;
 
 fetch("/api/projects")
   .then(function(response) {
@@ -13,7 +14,8 @@ fetch("/api/projects")
         data[i].name = data[i].name.replace(/\s/g, "_")
         all_projects.push(data[i])
     }
-
+    current_card = document.getElementById("card-"+all_projects[0].safe_name)
+    showProject(all_projects[0].safe_name)
 })
 
 fetch("/api/project_tags")
@@ -58,7 +60,8 @@ function tagClicked(tag) {
 
 }
 
-var current_card = document.getElementById("base-card")
+//get first child of projects_container
+
 
 function showProject(project_name) {
     projectCard = document.getElementById('card-'+project_name)
