@@ -13,24 +13,24 @@
                     <p class="lg:px-20 text-5xl lg:text-5xl min-w-max font-extralight md:tracking-wide mx-auto">things I've made </p>
                     <hr class="my-auto z-0 w-full border-black hidden md:block">
                 </div>
-                <div class="grid grid-rows-2 xl:grid-cols-2 gap-5 md:gap-20">
-                    <div>
-                        <p class="text-2xl ">Tags</p>
+                <div class="grid grid-rows-2 xl:grid-cols-3 gap-5 md:gap-10">
+                    <div class="p-6">
+                        <p class="text-lg ">Tags</p>
                         <hr class="mb-4 border-slate-800">
                         <div class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 col-span-2 drop-shadow-md">
-                            <button class="rounded-md border-2 w-full 2xl:w-48 border-slate-900 p-1 hover:text-white hover:bg-slate-800 bg-slate-50 text-black transition ease-in" onclick="tagClicked('All')">
+                            <button class="rounded-md border-2 border-slate-900 p-1 hover:text-white hover:bg-slate-800 bg-slate-50 text-black transition ease-in" onclick="tagClicked('All')">
                                 All
                             </button>
                             <% tags.forEach(tag => { %>
-                                <button class="rounded-md border-2 w-full 2xl:w-48 border-slate-900 p-1 hover:text-black hover:bg-slate-50 bg-slate-800 text-white transition ease-in" onclick="tagClicked('<%= tag %>')">
+                                <button class="rounded-md border-2 border-slate-900 text-sm font-mono hover:text-black hover:bg-slate-50  bg-slate-800 text-white transition ease-in" onclick="tagClicked('<%= tag %>')">
                                     <%= tag %>
                                 </button>
                             <% }) %>
                         </div>
                         <hr class="my-4 border-slate-800">
-                        <div class="container flex text-lg font-mono mb-10">
+                        <div class="container flex text-md font-mono mb-10">
                             <p class="" id="tag_show">Showing All</p>
-                            <a class="ml-auto text-md" href="/alternative"> Alternative Page</a>
+                            <a class="ml-auto text-md" href="alternative"> Alternative Page</a>
                         </div>
                         <!-- Check if user -->
                         <% if (locals.user) { %>
@@ -52,7 +52,7 @@
                             <% }) %>
                         </div>
                     </div>
-                    <div>
+                    <div class="col-span-2">
                         <div id="base-card" class="col-span-2">
                             <div class=" clouds-dark  shadow-xl rounded-xl drop-shadow-2xl border-2 border-slate-900  hover:border-white transition ease-in-out grid grid-cols-8">
                                 <div class="p-14 h-80 rounded-xl bg-white col-span-7">
@@ -69,29 +69,27 @@
                             <div id='card-<%= project.safe_name %>' class="hidden col-span-2">
                                 
                                     <div class="bg-white shadow-xl grid grid-cols-1 rounded-xl drop-shadow-2xl  border-2 border-slate-900  hover:border-white transition ease-in-out lg:grid-cols-12 p-6">
-                                        <a href="view/<%= project.safe_name %>" class="absolute w-full h-full"></a>
-                                            <div class="flex flex-col lg:col-span-8 lg:p-8 bg-white rounded-xl">
+                                        <div class="flex flex-col lg:col-span-8 lg:p-8 bg-white rounded-xl">
+                                            <div class="flex flex-row">
                                                 <div class="flex flex-row">
-                                                    <div class="flex flex-row">
-                                                        <p  class="text-2xl font-serif">
-                                                            <%= project.name %>
-                                                        </p>
-                                                        <!--Check if user is logged in-->
-                                                        <% if (locals.user) { %>
-                                                            <a href="#" class="text-green-500 p-1">Edit</a>
-                                                            <a href="delete/<%= project.safe_name %> " class="text-red-500 p-1">Delete</a>
-                                                        <% } %>
-                                                    </div>
-                                                    <a target="_blank" href="<%= project.projectLink %>" class="ml-auto text-md"> <i class=" bi bi-github"></i> Github </a>
+                                                    <a href="view/<%= project.safe_name %>"  class="text-2xl font-serif">
+                                                        <%= project.name %>
+                                                    </a>
+                                                    <!--Check if user is logged in-->
+                                                    <% if (locals.user) { %>
+                                                        <a href="#" class="text-green-500 p-1">Edit</a>
+                                                        <a href="delete/<%= project.safe_name %> " class="text-red-500 p-1">Delete</a>
+                                                    <% } %>
                                                 </div>
-                                                <p class="md:text-md pt-6 text-justify">
-                                                    <%= project.description %>
-                                                </p>
+                                                <a target="_blank" href="<%= project.projectLink %>" class="ml-auto text-md"> <i class=" bi bi-github"></i> Github </a>
                                             </div>
-                                            <div class="ml-auto lg:col-span-4 w-full h-56 mx-auto p-2 pt-8">
-                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
-                                            </div>
-                                        </a>
+                                            <p class="md:text-md pt-6 text-justify">
+                                                <%= project.description %>
+                                            </p>
+                                        </div>
+                                        <div class="ml-auto lg:col-span-4 w-full h-56 mx-auto p-2 pt-8">
+                                            <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
+                                        </div>
                                     </div>
                                 
                             </div>

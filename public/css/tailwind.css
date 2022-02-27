@@ -2200,6 +2200,10 @@ Ensure the default browser behavior of the `hidden` attribute.
     gap: 5rem;
   }
 
+  .md\:gap-10 {
+    gap: 2.5rem;
+  }
+
   .md\:p-6 {
     padding: 1.5rem;
   }
