@@ -73,8 +73,34 @@ function showProject(project_name) {
     projectCard = document.getElementById('card-'+project_name)
     projectDesc = document.getElementById('desc-'+project_name)
 
+    projectLatestCommit = document.getElementById('latest-commit-'+project_name)
+    projectLatestCommitAuthor = document.getElementById('latest-commit-'+project_name+'-author')
+    projectLatestCommitDate = document.getElementById('latest-commit-'+project_name+'-date')
+
+
+    project_link = project_dict[project_name].projectLink
+    project_link_name = project_link.split("/")[project_link.split("/").length-1];
+    project_link_auth = project_link.split("/")[project_link.split("/").length-2];
+    api_link = "https://api.github.com/repos/"+project_link_auth+"/"+project_link_name+"/commits?per_page=1"
+
+    fetch(api_link).then(function(response) {
+        return response.json()
+    }).then((data) => {
+        console.log("z")
+        if (data.length > 0) {
+            console.log("A")
+            latest_commit = data[0]
+
+            projectLatestCommit.innerHTML = latest_commit.commit.message
+            projectLatestCommitAuthor.innerHTML = latest_commit.commit.author.name
+            projectLatestCommitDate.innerHTML =  latest_commit.commit.author.date.split("T")[0]
+        }
+    })
+
+
     current_card.style.display = "none";
     projectCard.style.display = "grid"
+
     projectDesc.innerHTML =converter.makeHtml(project_dict[project_name].description);
 
     current_card = projectCard

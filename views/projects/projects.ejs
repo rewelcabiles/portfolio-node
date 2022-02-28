@@ -82,8 +82,19 @@
                                                     </span>
                                                 <% }) %>
                                             </div>
-                                            <div class="md:text-md pt-6 text-justify is_markdown" style="" id="desc-<%= project.safe_name %>">
+                                            <div class="md:text-md pt-6 text-justify is_markdown" id="desc-<%= project.safe_name %>">
                                                 <%= project.description %>
+                                            </div>
+                                            <hr>
+                                            <p class="my-2 font-semibold">Latest Commits</p>
+                                            <div class="grid grid-cols-6">
+                                                <div class="col-span-2">
+                                                    <p id="latest-commit-<%= project.safe_name %>-author"></p>
+                                                    <p id="latest-commit-<%= project.safe_name %>-date"></p>
+                                                </div>
+                                                <p class="col-span-4" id="latest-commit-<%= project.safe_name %>">
+
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="ml-auto lg:col-span-4 w-full h-56 mx-auto p-2 pt-8">
