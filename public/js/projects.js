@@ -5,6 +5,8 @@ var all_tags = [];
 var current_tag;
 var current_card;
 
+
+var project_dict = {}
 fetch("/api/projects")
   .then(function(response) {
     return response.json()
@@ -13,6 +15,7 @@ fetch("/api/projects")
     for (var i = 0; i < data.length; i++) {
         data[i].name = data[i].name.replace(/\s/g, "_")
         all_projects.push(data[i])
+        project_dict[data[i].name] = data[i]
     }
     current_card = document.getElementById("card-"+all_projects[0].safe_name)
     showProject(all_projects[0].safe_name)
@@ -60,13 +63,20 @@ function tagClicked(tag) {
 
 }
 
-//get first child of projects_container
+//import from cd
 
+//get first child of projects_container
+var converter = new showdown.Converter();
+converter.setFlavor('github');
 
 function showProject(project_name) {
     projectCard = document.getElementById('card-'+project_name)
+    projectDesc = document.getElementById('desc-'+project_name)
+
     current_card.style.display = "none";
     projectCard.style.display = "grid"
+    projectDesc.innerHTML =converter.makeHtml(project_dict[project_name].description);
+
     current_card = projectCard
 }
 

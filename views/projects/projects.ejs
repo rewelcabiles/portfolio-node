@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     
+    
 </head>
 <body>
     <div class="flex flex-row overflow-hidden h-screen w-screen ">
@@ -81,9 +82,9 @@
                                                     </span>
                                                 <% }) %>
                                             </div>
-                                            <p class="md:text-md pt-6 text-justify">
+                                            <div class="md:text-md pt-6 text-justify is_markdown" style="" id="desc-<%= project.safe_name %>">
                                                 <%= project.description %>
-                                            </p>
+                                            </div>
                                         </div>
                                         <div class="ml-auto lg:col-span-4 w-full h-56 mx-auto p-2 pt-8">
                                             <% if (project.banner == "") { %>
@@ -103,6 +104,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.0/showdown.min.js"></script>
     <script src="/js/projects.js"></script>
 </body>
 </html>
