@@ -106,5 +106,11 @@ function showProject(project_name) {
     current_card = projectCard
 }
 
+// Get all elements with the class is_markdown
+var markdown_elements = document.getElementsByClassName("is_markdown");
+for (var i = 0; i < markdown_elements.length; i++) {
+    markdown_elements[i].innerHTML = converter.makeHtml(markdown_elements[i].innerHTML);
+}
+
 // .replace(/\s/g, "_")
 

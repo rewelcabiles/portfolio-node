@@ -1,0 +1,118 @@
+<div class="container mx-auto lg:px-36 my-20">
+    <div id='card-<%= project.safe_name %>'>
+        <div class="bg-white shadow-md flex flex-col rounded-xl border-2 border-slate-300 p-8">
+            
+            <div class="flex flex-row px-8 pt-2">
+                
+                <div class="flex flex-row">
+                    <a href="view/<%= project.safe_name %>"  class="text-2xl font-semibold ">
+                        <%= project.name %>
+                    </a>
+                </div>
+                <% if (locals.user) { %>
+                    <div class="flex flex-row  ">
+                        <a href="update/<%= project.safe_name %>" class="text-green-500 p-1">Edit</a>
+                        <a href="delete/<%= project.safe_name %>" class="text-red-500 p-1">Delete</a>
+                    </div>
+                <% } %>
+                <a target="_blank" href="<%= project.projectLink %>" class="ml-auto text-md"> <i class=" bi bi-github"></i> Github </a>
+            </div>
+
+
+            <div class="grid grid-cols-12">
+                <div class="flex flex-col lg:col-span-7 lg:px-8 pb-8 bg-white rounded-xl">
+                    <div class="md:text-md text-justify is_markdown" id="desc-<%= project.safe_name %>">
+<%= project.description %>
+                    </div>
+                    
+                    <p class="mb-2 mt-10 font-semibold">Latest Commits</p>
+                    <hr>
+                    <div class="grid grid-cols-6">
+                        <div class="col-span-2">
+                            <p id="latest-commit-<%= project.safe_name %>-author"></p>
+                            <p id="latest-commit-<%= project.safe_name %>-date"></p>
+                        </div>
+                        <p class="col-span-4" id="latest-commit-<%= project.safe_name %>">
+
+                        </p>
+                    </div>
+                </div>
+            
+                <div class="ml-auto lg:col-span-5 w-full h-56 mx-auto p-2 pt-8">
+                    <% if (project.banner == "") { %>
+                        <img class="object-cover w-full h-full bg-center rounded-md shadow-md border-gray-900 "  src="/media/placeholder_small.jpg" alt="">
+                    <% } else { %>
+                        <img class="object-cover w-full h-full bg-center rounded-md shadow-md border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
+                    <% } %>
+                    <div class="flex flex-row mt-2 ">
+                        <% project.tags.forEach(tag => { %>
+                            <span class="inline-block text-sm bg-slate-800 text-white px-2 mr-1 rounded-md font-sans">
+                                <%= tag %>
+                            </span>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex flex-row mt-10">
+        <div class="basis-1/4 pt-20">
+            <!-- Date filter -->
+            <p class="font-semibold text-lg ml-5">
+                Date
+            </p>
+            <!-- Display a list -->
+            <ul class="list-disc ml-10">
+                <li class="mt-2 font-light">
+                January
+                </li>
+                <li class="mt-2 font-light">
+                Febuary
+                </li>
+                <li class="mt-2 font-light">
+                March
+                </li>
+                <li class="mt-2 font-light">
+                April
+                </li>
+                <li class="mt-2 font-light">
+                May
+                </li>
+                <li class="mt-2 font-light">
+                June
+                </li>
+                <li class="mt-2 font-light">
+                July
+                </li>
+                <li class="mt-2 font-light">
+                August
+                </li>
+                <li class="mt-2 font-light">
+                September
+                </li>
+                <li class="mt-2 font-light">
+                October
+                </li>
+                <li class="mt-2 font-light">
+                November
+                </li>
+                <li class="mt-2 font-light">
+                December
+                </li>
+
+            </ul>
+            
+
+        </div>
+        <!-- Update posts -->
+        <div class="flex flex-col gap-10 basis-3/4">
+            <%- include("view_project_post")  %> 
+            <%- include("view_project_post")  %> 
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.0.0/showdown.min.js"></script>
+<script src="/js/projects.js"></script>
