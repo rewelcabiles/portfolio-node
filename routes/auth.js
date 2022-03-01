@@ -12,8 +12,15 @@ var jsonParser = bodyParser.json()
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 
-//login post router
+// Check if prod from environmental variable
+const isProd = process.env.NODE_ENV === 'production'
+
 router.post('/register', urlencodedParser, (req, res) => {
+    // return 404 if_prod
+    if (isProd) {
+        res.status(404).send('404 Not Found')
+        return
+    }
     const { username, password } = req.body;
 
     User.findOne({ username: username }, (err, user) => {
@@ -66,6 +73,12 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/register', (req, res) => {
+    // return 404 if_prod
+    console.log(isProd)
+    if (isProd) {
+        res.status(404).send('404 Not Found')
+        return
+    }
    res.render('auth/login', {
        "isRegister": true
    });

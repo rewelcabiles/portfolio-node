@@ -14,7 +14,7 @@
                     <p class="lg:px-20 text-3xl lg:text-5xl min-w-max font-extralight md:tracking-wide mx-auto">things I've made </p>
                     <hr class="my-auto z-0 w-full border-black hidden md:block">
                 </div>
-                <div class="grid grid-rows-1 xl:grid-cols-3 gap-5 md:gap-10">
+                <div class="grid grid-rows-1 xl:grid-cols-3 gap-5 md:gap-20">
                     <div class="p-6">
                         <p class="text-lg mb-4 ">Tags</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-4 gap-4 col-span-2 drop-shadow-md">
@@ -55,8 +55,8 @@
                     <div class="xl:col-span-2" id="projects_panel">
                         <% all_projects.forEach(project => { %>
                             <div id='card-<%= project.safe_name %>' class="hidden col-span-2">
-                                    <div class="bg-white shadow-md grid grid-cols-1 rounded-md drop-shadow-md border-2 hover:border-slate-900 transition ease-in-out lg:grid-cols-12 p-6">
-                                        <div class="flex flex-col lg:col-span-8 lg:p-8 bg-white rounded-xl">
+                                    <div class="  grid grid-cols-1 rounded-md  lg:grid-cols-12 p-6">
+                                        <div class="flex flex-col lg:col-span-8 lg:p-8  rounded-xl">
                                             
                                                 <% if (locals.user) { %>
                                                     <div class="flex flex-row  ">
@@ -93,9 +93,9 @@
                                         </div>
                                         <div class="ml-auto lg:col-span-4 w-full h-56 mx-auto p-2 pt-8">
                                             <% if (project.banner == "") { %>
-                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/media/placeholder_small.jpg" alt="">
+                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-2 border-gray-900 "  src="/media/placeholder_small.jpg" alt="">
                                             <% } else { %>
-                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
+                                                <img class="object-cover w-full h-full bg-center rounded-md shadow-2xl border-2 border-gray-900 "  src="/projects/<%= project.banner %>" alt="">
                                             <% } %>
                                             <div class="flex flex-row mt-2 ">
                                                 <% project.tags.forEach(tag => { %>
